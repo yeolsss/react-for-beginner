@@ -38,7 +38,6 @@ function App() {
   return (
     <div>
       <h1>The coins!({coins.length})</h1>
-      {loading ? <strong>Loading...</strong> : null}
       <label htmlFor='useMoney'>사용금액: </label>
       <input
         type='number'
@@ -46,14 +45,19 @@ function App() {
         value={useMoney}
         onChange={handleDeposit}
       />
-      <select onChange={handleSelect} value={selected}>
-        <option value='xx'>select Coin</option>
-        {coins.map((coin) => (
-          <option value={coin.quotes.USD.price}>
-            {coin.name} ({coin.symbol}):${coin.quotes.USD.price}
-          </option>
-        ))}
-      </select>
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
+        <select onChange={handleSelect} value={selected}>
+          <option value='xx'>select Coin</option>
+          {coins.map((coin) => (
+            <option value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}):${coin.quotes.USD.price}
+            </option>
+          ))}
+        </select>
+      )}
+
       <h1>{buyCoin}개의 Coin을 구매하실수 있습니다.</h1>
       <button onClick={reset}>Reset</button>
     </div>
